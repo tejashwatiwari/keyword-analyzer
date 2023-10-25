@@ -5,8 +5,8 @@ import Main from './components/dashboard/Main'
 export default function App() {
   return (
     <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Box sx={{ my: 8 }}>
+        <Typography variant="h4" fontFamily="Sans-serif" component="h1" gutterBottom >
           KeywordPulse - Everything you need to rank higher & get more traffic
         </Typography>
         <Main />

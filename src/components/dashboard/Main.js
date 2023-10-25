@@ -4,16 +4,14 @@ import './main.css'
 
 
 export default function Main() {
-       
-
     return (
         <>
         <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Choose Algorithm</InputLabel>
+            <InputLabel id="choose-algorithm">Choose Algorithm</InputLabel>
             <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="choose-algorithm"
+            id="simple-select"
             // value={age}
             label="Choose Algorithm"
             // onChange={handleChange}
@@ -27,7 +25,7 @@ export default function Main() {
         </FormControl>
         </Box>
      
-            <Box
+            <Box id="url-box"
             component="form"
             sx={{
             '& > :not(style)': { m: 1, width: '25ch' },
@@ -39,7 +37,7 @@ export default function Main() {
         </Box>
    
    
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" id ="search-button">
             <Button variant="contained">Search</Button>
         </Stack>
         </>
