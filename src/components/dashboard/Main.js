@@ -1,18 +1,10 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import {Select, TextField, Stack, Button} from '@mui/material';
-
-
-
+import {Select, TextField, Stack, Button, FormControl, MenuItem, InputLabel, Box} from '@mui/material';
+import './main.css'
 
 
 export default function Main() {
-        // const [age, setAge] = React.useState('');
-        // const handleChange = (event) => {
-        //     setAge(event.target.value);
+       
 
     return (
         <>

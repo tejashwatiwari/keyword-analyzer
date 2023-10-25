@@ -1,12 +1,6 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-// import TextFieldExample from './TextFields/TextFieldExample';
-// import SubmitButton from './Buttons/SubmitButton';
-// import SelectAlgo from './SelectAlgo/SelectAlgo';
-import Main from './Main'
+import React from 'react';
+import {Container,Typography,Box} from '@mui/material';
+import Main from './components/dashboard/Main'
 
 export default function App() {
   return (
@@ -16,9 +10,7 @@ export default function App() {
           KeywordPulse - Everything you need to rank higher & get more traffic
         </Typography>
         <Main />
-        {/* <SelectAlgo />
-        <TextFieldExample />
-        <SubmitButton /> */}
+
         </Box>
     </Container>
   );
