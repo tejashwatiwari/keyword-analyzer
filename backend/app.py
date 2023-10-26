@@ -285,35 +285,108 @@ def suffixa(url):
 
     return top_keywords
 
+def naive_string_matching(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    for i in range(n - m + 1):
+        if text[i:i + m] == pattern:
+            return f"Keyword '{pattern}' found in the visible text."
+    return f"Keyword '{pattern}' not found in the visible text."
+
+def is_keyword_present(url, keyword):
+    try:
+        # Send a GET request to the URL
+        response = requests.get(url)
+
+        # Get visible text from the response content
+        visible_text = response.text
+
+        # Use naive_string_matching to check if the keyword is present in the visible text
+        result = naive_string_matching(visible_text, keyword)
+        return result
+    except Exception as e:
+        # Handle any errors that occur during the process
+        print(f"An error occurred: {e}")
+        return f"Error occurred: {e}"
+
+@app.route('/check_keyword')
+def check_keyword():
+    # Get the 'url' and 'keyword' query parameters from the request
+    url = request.args.get('url')
+    keyword = request.args.get('keyword')
+
+    # Call the is_keyword_present function and return the result
+    result = is_keyword_present(url, keyword)
+    return result 
+
 # route for the KMP algorithm
-@app.route('/kmp/<path:url>')
-def kmp_route(url):
+@app.route('/kmp')
+def kmp_route():
+    url = request.args.get('url')
     keywords = kmp(url)
     return jsonify({"keywords": keywords})
 
 # route for the Naive approach
-@app.route('/naive/<path:url>')
-def naive_route(url):
+@app.route('/naive')
+def naive_route():
+    url = request.args.get('url')
     keywords = naive(url)
     return jsonify({"keywords": keywords})
 
 # route for the Rabin-Karp algorithm
-@app.route('/rabin/<path:url>')
-def rabin_route(url):
+@app.route('/rabin')
+def rabin_route():
+    url = request.args.get('url')
     keywords = rabin(url)
     return jsonify({"keywords": keywords})
 
 # route for the Suffix Tree algorithm
-@app.route('/suffix-tree/<path:url>')
-def suffix_tree_route(url):
+@app.route('/suffix-tree')
+def suffix_tree_route():
+    url = request.args.get('url')
     keywords = suffixt(url)
     return jsonify({"keywords": keywords})
 
 # route for the Suffix Array algorithm
-@app.route('/suffix-array/<path:url>')
-def suffix_array_route(url):
+@app.route('/suffix-array')
+def suffix_array_route():
+    url = request.args.get('url')
     keywords = suffixa(url)
     return jsonify({"keywords": keywords})
 
+
+@app.route('/search', methods=['POST'])
+def search():
+    # Get the JSON data from the request
+    data = request.json
+
+    # Extract the algorithm and search term from the JSON data
+    selected_algorithm = data.get('algorithm')
+    search_term = data.get('searchTerm')
+
+    # Implement the logic to process the search_term based on the selected_algorithm
+    # You can call the appropriate function depending on the selected_algorithm
+
+    # Example: Assuming you have a function `process_search_term` that handles the search
+    # term based on the selected algorithm
+    if selected_algorithm == 'rabin':
+        result = process_search_term(search_term, 'Rabin-Karp')
+    elif selected_algorithm == 'suffixt':
+        result = process_search_term(search_term, 'Suffix Tree')
+    elif selected_algorithm == 'suffixa':
+        result = process_search_term(search_term, 'Suffix Array')
+    elif selected_algorithm == 'naive':
+        result = process_search_term(search_term, 'Naive-String Matching')
+    elif selected_algorithm == 'kmp':
+        result = process_search_term(search_term, 'KMP Algorithm')
+    else:
+        result = []
+
+    # Return the result as a JSON response
+    return jsonify({"results": result})
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+    
